@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Course List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        /* Main Content Styles */
+        h1 {
+            text-align: center; /* Center the heading */
+            margin-top: 20px; /* Space from the top */
+            color: #5cb85c; /* Primary green color for the heading */
+        }
+        /* Course List Styles */
+        .course-list {
+            max-width: 800px; /* Max width for the course list */
+            margin: 20px auto; /* Center the list */
+            padding: 15px;
+            background: white; /* White background for the list */
+            border-radius: 5px; /* Rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        }
+        .course-list table {
+            width: 100%; /* Full width for table */
+            border-collapse: collapse; /* Remove space between cells */
+        }
+        .course-list th, .course-list td {
+            padding: 10px; /* Padding for table cells */
+            text-align: center; /* Center text in cells */
+            border-bottom: 1px solid #ccc; /* Border between rows */
+        }
+        .course-list th {
+            background-color: #5cb85c; /* Header background color */
+            color: white; /* Header text color */
+        }
+        .course-list .text-success {
+            color: #28a745; /* Green color for price */
+            font-weight: bold; /* Bold price */
+        }
+        /* Action Links */
+        .action-links {
+            text-align: center; /* Center action links */
+            margin-top: 20px; /* Space above action links */
+        }
+        .action-links a {
+            display: inline-block; /* Make links inline-block */
+            margin: 10px; /* Space between links */
+            padding: 10px 15px; /* Padding for buttons */
+            background-color: #5cb85c; /* Button color */
+            color: white; /* Button text color */
+            text-decoration: none; /* Remove underline from links */
+            border-radius: 3px; /* Rounded corners */
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+        .action-links a:hover {
+            background-color: #4cae4c; /* Darker green on hover */
+        }
+        /* Logout Link */
+        .logout-link {
+            position: absolute; /* Position in top corner */
+            top: 15px;
+            right: 15px;
+        }
+        .logout-link a {
+            padding: 10px 15px;
+            background-color: #d9534f; /* Red color for logout */
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+            transition: background-color 0.3s;
+        }
+        .logout-link a:hover {
+            background-color: #c9302c; /* Darker red on hover */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="logout-link">
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
+
+    <div class="container my-5 course-list">
+        <h1 class="text-center">Available Courses</h1>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Course Name</th>
+                        <th scope="col">Credit hours</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for course in courses %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td class="fw-bold">{{ course.name }}</td>
+                        <td>{{ course.credit_hour }}</td>
+                        <td class="text-success">${{ course.price }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="action-links">
+            <a href="{% url 'make_payment' %}">Register for course</a>
+        </div>
+    </div>
+
+</body>
+</html>
